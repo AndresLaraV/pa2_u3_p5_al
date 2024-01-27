@@ -1,5 +1,7 @@
 package com.uce.edu.ec.ventas.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.ec.ventas.repository.modelo.Factura;
@@ -22,7 +24,7 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 				Factura.class);
 		myQuery.setParameter("numero", numero);
 		Factura fact = myQuery.getSingleResult();
-		fact.getDetalleFacturas().size();
+		fact.getDetalleFactura().size();
 		return fact;
 
 	}
@@ -31,5 +33,63 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 	public void insertar(Factura factura) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(factura);
+	}
+
+	@Override
+	public List<Factura> seleccionarInnerJoin() {
+		// TODO Auto-generated method stub
+		// SQL: SLECT * FROM factura f INNER JOIN detalle_factura d ON f.fact_id =
+		// d.defa_id_factura
+
+		// JPQL: SELECT f FROM Factura f INNER JOIN f.detalleFactura d
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery("SELECT f FROM Factura f JOIN f.detalleFactura d",
+				Factura.class);
+
+		List<Factura> lista = myQuery.getResultList();
+		for (Factura f : lista) {
+			f.getDetalleFactura().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Factura> seleccionarPorRightJoin() {
+		// TODO Auto-generated method stub
+
+		TypedQuery<Factura> myQuery = this.entityManager
+				.createQuery("SELECT f FROM Factura f RIGHT JOIN f.detalleFactura d", Factura.class);
+
+		List<Factura> lista = myQuery.getResultList();
+		for (Factura f : lista) {
+			f.getDetalleFactura().size();
+		}
+		return lista;
+
+	}
+
+	@Override
+	public List<Factura> seleccionarPorLeftJoin() {
+		// TODO Auto-generated method stub
+		TypedQuery<Factura> myQuery = this.entityManager
+				.createQuery("SELECT f FROM Factura f LEFT JOIN f.detalleFactura d", Factura.class);
+
+		List<Factura> lista = myQuery.getResultList();
+		for (Factura f : lista) {
+			f.getDetalleFactura().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Factura> seleccionarPorFullJoin() {
+		// TODO Auto-generated method stub
+		TypedQuery<Factura> myQuery = this.entityManager
+				.createQuery("SELECT f FROM Factura f FULL JOIN f.detalleFactura d", Factura.class);
+
+		List<Factura> lista = myQuery.getResultList();
+		for (Factura f : lista) {
+			f.getDetalleFactura().size();
+		}
+		return lista;
 	}
 }

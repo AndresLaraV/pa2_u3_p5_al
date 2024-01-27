@@ -17,10 +17,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "factura")
 public class Factura {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_factura")
-	@SequenceGenerator(name = "seq_factura",sequenceName = "seq_factura",allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_factura")
+	@SequenceGenerator(name = "seq_factura", sequenceName = "seq_factura", allocationSize = 1)
 	@Column(name = "fact_id")
 	private Integer id;
 	@Column(name = "fact_numero")
@@ -29,45 +29,55 @@ public class Factura {
 	private LocalDate fecha;
 	@Column(name = "fact_cedula")
 	private String cedula;
-	
+
 	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<DetalleFactura> detalleFacturas;
-	
-	//GET Y SET
+	private List<DetalleFactura> detalleFactura;
+
+	// GET Y SET
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getNumero() {
 		return numero;
 	}
+
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
+
 	public LocalDate getFecha() {
 		return fecha;
 	}
+
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
 	public String getCedula() {
 		return cedula;
 	}
+
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
-	
-	
-	public List<DetalleFactura> getDetalleFacturas() {
-		return detalleFacturas;
+
+	public List<DetalleFactura> getDetalleFactura() {
+		return detalleFactura;
 	}
-	public void setDetalleFacturas(List<DetalleFactura> detalleFacturas) {
-		this.detalleFacturas = detalleFacturas;
+
+	public void setDetalleFacturas(List<DetalleFactura> detalleFactura) {
+		this.detalleFactura = detalleFactura;
 	}
+
 	@Override
 	public String toString() {
-		return "Factura [id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", cedula=" + cedula + "]";
+		return "Factura [id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", cedula=" + cedula
+				+ ", detalleFactura=" + detalleFactura + "]";
 	}
+
 }
