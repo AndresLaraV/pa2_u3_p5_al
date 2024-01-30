@@ -23,27 +23,30 @@ public class Pa2U3P5AlApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+
 		System.out.println("INNER JOIN");
-		List<Factura> lista = this.facturaService.buscarInnerJoin();
-		for (Factura f : lista) {
-			System.out.println(f);
-		}
-		System.out.println("RIGHT JOIN");
-		List<Factura> lista2 = this.facturaService.buscarPorRightJoin();
-		for (Factura f : lista2) {
-			System.out.println(f);
-		}
-		System.out.println("LEFT JOIN");
-		List<Factura> lista3 = this.facturaService.buscarPorLeftJoin();
+		List<Factura> lista3 = this.facturaService.buscarInnerJoin();
 		for (Factura f : lista3) {
-			System.out.println(f);
+			System.out.println(f.getNumero());
+//			for (DetalleFactura d : f.getDetalleFactura()) {
+//				System.out.println(d.getNombreProducto());
+//			}
 		}
-		System.out.println("FULL JOIN");
-		List<Factura> lista4 = this.facturaService.buscarPorFullJoin();
+		System.out.println("WHERE JOIN");
+		List<Factura> lista4 = this.facturaService.buscarPorWhereJoin();
 		for (Factura f : lista4) {
-			System.out.println(f);
+			System.out.println(f.getNumero());
 			for (DetalleFactura d : f.getDetalleFactura()) {
-				System.out.println(d);
+				System.out.println(d.getNombreProducto());
+			}
+		}
+		
+		System.out.println("JOIN FETCH");
+		List<Factura> lista5 = this.facturaService.buscarPorFetchJoin();
+		for (Factura f : lista5) {
+			System.out.println(f.getNumero());
+			for (DetalleFactura d : f.getDetalleFactura()) {
+				System.out.println(d.getNombreProducto());
 			}
 		}
 	}

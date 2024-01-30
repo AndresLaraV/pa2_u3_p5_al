@@ -8,13 +8,17 @@ public interface IFacturaService {
 
 	public Factura buscarPorNumero(String numero);
 
-	public void guardar (Factura factura);
-	
+	public void guardar(Factura factura);
+
 	public List<Factura> buscarInnerJoin();
-	
+
 	public List<Factura> buscarPorRightJoin();
-	
+
 	public List<Factura> buscarPorLeftJoin();
-	
+
 	public List<Factura> buscarPorFullJoin();
+
+	public List<Factura> buscarPorWhereJoin();
+
+	public List<Factura> buscarPorFetchJoin();
 }
