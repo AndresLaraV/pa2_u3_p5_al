@@ -1,14 +1,15 @@
 package com.uce.edu.ec;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import com.uce.edu.ec.ventas.repository.modelo.dto.FacturaDTO;
+import com.uce.edu.ec.ventas.repository.modelo.Cliente;
+import com.uce.edu.ec.ventas.repository.modelo.Factura;
 import com.uce.edu.ec.ventas.service.IFacturaService;
 
 @SpringBootApplication
@@ -24,20 +25,18 @@ public class Pa2U3P5AlApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		System.out.println("UPDATE");
-		int cantidad = this.facturaService.actualizarFechas(LocalDate.of(2024, 1, 24), LocalDate.of(2024, 1, 26));
-		System.out.println("Cantidad actualizados");
-		System.out.println(cantidad);	
+		System.out.println(TransactionSynchronizationManager.isActualTransactionActive());
 		
-		System.out.println("ELIMINAR");	
-		int cantidadElim = this.facturaService.borrarPorNumero("0001-02571");
-		System.out.println("cantidad de registros/filas eliminados: "+ cantidadElim);
-
-		System.out.println("DTO");
-		List<FacturaDTO> listDTO = this.facturaService.buscarFacturasDTO();
-		for (FacturaDTO fDTO : listDTO) {
-			System.out.println(fDTO);
-		}
+		Factura  fact1 = new Factura();
+		fact1.setCedula("125125");
+		fact1.setFecha(LocalDate.now());
+		fact1.setNumero("001-001004");
+		
+		Cliente clie1 = new Cliente ();
+		clie1.setApellido("Viana");
+		clie1.setNombre("Sebastian");
+		
+		this.facturaService.guardar(fact1, clie1);
 	}
 
 }
