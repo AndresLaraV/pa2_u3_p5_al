@@ -7,7 +7,8 @@ import com.uce.edu.ec.ventas.repository.modelo.Factura;
 import com.uce.edu.ec.ventas.repository.modelo.dto.FacturaDTO;
 
 public interface IFacturaRepository {
-
+	public Factura buscar ();
+	
 	public Factura selecionarPorNumero(String numero);
 
 	public void insertar(Factura factura);

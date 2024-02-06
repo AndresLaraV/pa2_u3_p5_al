@@ -13,6 +13,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional.TxType;
 
 @Repository
 @Transactional
@@ -131,12 +132,12 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 	@Override
 	public int actualizarFechas(LocalDate fechaNueva, LocalDate fechaActual) {
 		// TODO Auto-generated method stub
-		String jpql="UPDATE Factura f SET f.fecha= :fechaNueva WHERE f.fecha >= :fechaActual";
+		String jpql = "UPDATE Factura f SET f.fecha= :fechaNueva WHERE f.fecha >= :fechaActual";
 		Query myQuery = this.entityManager.createQuery(jpql);
 		myQuery.setParameter("fechaNueva", fechaNueva);
 		myQuery.setParameter("fechaActual", fechaActual);
 		return myQuery.executeUpdate();
-		
+
 	}
 
 	public Factura buscar(Integer id) {
@@ -167,8 +168,16 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 	@Override
 	public List<FacturaDTO> seleccionarFacturasDTO() {
 		// TODO Auto-generated method stub
-		TypedQuery<FacturaDTO> myQuery = this.entityManager
-				.createQuery("SELECT NEW com.uce.edu.ec.ventas.repository.modelo.dto.FacturaDTO(f.numero, f.fecha) FROM Factura f", FacturaDTO.class);
+		TypedQuery<FacturaDTO> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.ec.ventas.repository.modelo.dto.FacturaDTO(f.numero, f.fecha) FROM Factura f",
+				FacturaDTO.class);
 		return myQuery.getResultList();
+	}
+
+	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
+	public Factura buscar() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

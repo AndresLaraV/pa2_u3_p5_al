@@ -12,6 +12,8 @@ public interface IFacturaService {
 	public Factura buscarPorNumero(String numero);
 
 	public void guardar(Factura factura, Cliente cliente);
+	
+	public void prueba ();
 
 	public void actualizar(Factura factura);
 

@@ -35,9 +35,18 @@ public class FacturaServiceImpl implements IFacturaService {
 		System.out.println(TransactionSynchronizationManager.isActualTransactionActive());
 		this.FacturaRepository.insertar(factura);
 		System.out.println("Pasó el insert de factura");
-		
+
 		this.ClienteService.guardar(cliente);
 		System.out.println("Pasó el insert de cliente");
+	}
+
+	@Override
+	@Transactional(value = TxType.MANDATORY)// Obliga a que desde de donde se lo llama tenga
+	public void prueba() {
+		// TODO Auto-generated method stub
+		System.out.println("Este es el método de prueba");
+		System.out.println(TransactionSynchronizationManager.isActualTransactionActive());
+
 	}
 
 	@Override

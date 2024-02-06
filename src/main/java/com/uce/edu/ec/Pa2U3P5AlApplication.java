@@ -33,10 +33,14 @@ public class Pa2U3P5AlApplication implements CommandLineRunner {
 		fact1.setNumero("001-001004");
 		
 		Cliente clie1 = new Cliente ();
-		clie1.setApellido("Viana");
+		clie1.setApellido(null);
 		clie1.setNombre("Sebastian");
 		
-		this.facturaService.guardar(fact1, clie1);
+		//this.facturaService.guardar(fact1, clie1);
+
+		System.out.println(TransactionSynchronizationManager.isActualTransactionActive());
+		this.facturaService.prueba();	
+		
 	}
 
 }
