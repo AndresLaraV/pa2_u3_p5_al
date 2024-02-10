@@ -12,8 +12,12 @@ public interface IFacturaService {
 	public Factura buscarPorNumero(String numero);
 
 	public void guardar(Factura factura, Cliente cliente);
+
+	public void prueba();
+
+	public void pruebaSupports();
 	
-	public void prueba ();
+	public void pruebaNever();
 
 	public void actualizar(Factura factura);
 
@@ -34,6 +38,7 @@ public interface IFacturaService {
 	public List<Factura> buscarPorWhereJoin();
 
 	public List<Factura> buscarPorFetchJoin();
-	
+
 	public List<FacturaDTO> buscarFacturasDTO();
+
 }
