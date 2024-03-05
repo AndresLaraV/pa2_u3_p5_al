@@ -5,6 +5,7 @@ public class Ciudadano {
 	private String nombre;
 	private String apellido;
 	private String provincia;
+	private LocalDate fecha;
 
 	// Set y Get
 	public String getApellido() {
